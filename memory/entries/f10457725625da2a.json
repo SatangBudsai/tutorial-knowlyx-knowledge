@@ -1,0 +1,13 @@
+{
+  "id": "f10457725625da2a",
+  "kind": "team_decision",
+  "domain": "perf",
+  "title": "Test 1",
+  "body": "no sync",
+  "tags": [],
+  "approved_by": "team",
+  "approved": true,
+  "repo_path": ".",
+  "created_at": "2026-05-23T17:11:15.352733",
+  "metadata": {}
+}

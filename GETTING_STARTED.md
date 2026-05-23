@@ -50,15 +50,32 @@ The AI sees skill descriptions via `analyze_intent` and pulls the body via
 `read_skill(name)` when relevant. See [skills/README.md](skills/README.md) for
 the full format reference.
 
-## Day-to-day workflow
+## Day-to-day workflow — git is automatic
 
-- **Tech lead / anyone**: write skills in `skills/*.md`, commit, push
-- **Other devs**: `git pull` in this folder → instantly see updated knowledge
-- **Verify Claude actually used Knowlyx**: in any linked repo, run
-  ```bash
-  knowlyx audit
-  ```
-  to see which MCP tools the AI called (last ~500 events, capped automatically)
+Knowlyx **auto-syncs** every write to the knowledge repo. You usually don't
+type `git pull` or `git push` yourself:
+
+- `knowlyx memory decide ...` → save + `git pull --rebase` + `git commit` + `git push`
+- `knowlyx approval approve|reject` → same
+- `knowlyx init` in a working repo → registers it + pushes the topology update
+
+To opt out (manual git control), set `KNOWLYX_AUTO_SYNC=0` in your environment.
+
+**Manual sync** when you do want it:
+
+```bash
+knowlyx sync          # one-shot: pull then push everything pending
+knowlyx sync watch    # daemon: pull+push every 60s (Ctrl+C to stop)
+knowlyx sync status   # show local vs remote
+```
+
+**Verify Claude actually used Knowlyx**: in any linked repo, run
+
+```bash
+knowlyx audit
+```
+
+to see which MCP tools the AI called (last ~500 events, capped automatically).
 
 ## Useful CLI commands
 
